@@ -84,7 +84,6 @@ export default {
   brandSuccess: '#5cb85c',
   brandDanger: '#d9534f',
   brandWarning: '#f0ad4e',
-  brandSidebar: '#252932',
 
 
   // Font
