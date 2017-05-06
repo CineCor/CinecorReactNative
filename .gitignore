@@ -2,13 +2,6 @@
 #
 .DS_Store
 
-# XDE
-.exponent/
-
-# VSCode
-.vscode/
-tsconfig.json
-
 # Xcode
 #
 build/
@@ -58,5 +51,3 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
-android/app/libs
-android/keystores/debug.keystore
