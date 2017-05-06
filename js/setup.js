@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { Provider }         from 'react-redux';
 import App                  from './App';
 import configureStore       from './configureStore';
+// import I18n                 from 'react-native-i18n';
+// import translations         from './translations';
 
 function setup():React.Component {
   class Root extends Component {

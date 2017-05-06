@@ -1,86 +1,45 @@
 
 import React, { Component }   from 'react';
 import { connect }            from 'react-redux';
-import { actions }            from 'react-native-navigation-redux-helpers';
 import myTheme                from '../../themes/base-theme';
 import {
-  View, Text,
-  ScrollView
+  View, Text, ScrollView,
+  Dimensions
 }                             from 'react-native'
 import ScrollableTabView,
   { ScrollableTabBar }        from 'react-native-scrollable-tab-view';
+import DefaultTabBar          from './defaultTabBar'
 
-
-const {
-  pushRoute,
-  replaceAt,
-} = actions;
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 class Tabs extends Component {
-
-  static propTypes = {
-    replaceAt: React.PropTypes.func,
-    pushRoute: React.PropTypes.func,
-    navigation: React.PropTypes.shape({
-      key: React.PropTypes.string,
-    }),
-  }
-
-  replaceAt(route) {
-    this.props.replaceAt('index', { key: route }, this.props.navigation.key);
-  }
-
-  pushRoute(route) {
-    this.props.pushRoute({ key: route, index: 1 }, this.props.navigation.key);
-  }
 
   render() {
     return (
       <ScrollableTabView
-        style={{marginTop: 300}}
+        style={{ height: height - TAB_HEIGHT }}
         initialPage={0}
-        renderTabBar={() => <ScrollableTabBar />}
+        renderTabBar={() => <DefaultTabBar />}
         tabBarPosition='bottom'
+        tabBarTextStyle={{flex: 1}}
       >
-      <ScrollView tabLabel="ios-paper" style={{flex:1}}>
-        <View style={{flex:1, backgroundColor: 'red'}}>
-          <Text>News</Text>
-        </View>
-      </ScrollView>
-      <ScrollView tabLabel="ios-people" style={{flex:1}}>
-        <View style={{flex:1, backgroundColor: 'red'}}>
-          <Text>Friends</Text>
-        </View>
-      </ScrollView>
-      <ScrollView tabLabel="ios-chatboxes" style={{flex:1}}>
-        <View style={{flex:1, backgroundColor: 'red'}}>
-          <Text>Messenger</Text>
-        </View>
-      </ScrollView>
-      <ScrollView tabLabel="ios-notifications" style={{flex:1}}>
-        <View style={{flex:1, backgroundColor: 'red'}}>
-          <Text>Notifications</Text>
-        </View>
-      </ScrollView>
-      <ScrollView tabLabel="ios-list" style={{flex:1}}>
-        <View style={{flex:1, backgroundColor: 'red'}}>
-          <Text>Other nav</Text>
-        </View>
-      </ScrollView>
+        <ScrollView tabLabel="View 1">
+					<View>
+						<Text>View 1</Text>
+					</View>
+        </ScrollView>
+
+        <ScrollView tabLabel="View 2">
+            <View>
+              <Text>View 2</Text>
+            </View>
+        </ScrollView>
       </ScrollableTabView>
     );
   }
 }
 
-function bindActions(dispatch) {
-  return {
-    replaceAt: (routeKey, route, key) => dispatch(replaceAt(routeKey, route, key)),
-    pushRoute: (route, key) => dispatch(pushRoute(route, key)),
-  };
-}
+const TAB_HEIGHT = 63
 
-const mapStateToProps = state => ({
-  navigation: state.cardNavigation,
-});
-
-export default connect(mapStateToProps, bindActions)(Tabs);
+export default Tabs
