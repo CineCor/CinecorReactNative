@@ -4,7 +4,7 @@ import { connect }          from 'react-redux';
 import Index                from './components/index/';
 import { statusBarColor }   from './themes/base-theme';
 import {
-  BackAndroid, StatusBar,
+  BackHandler, StatusBar,
   View
 } from 'react-native';
 
@@ -13,7 +13,7 @@ class AppNavigator extends Component {
 
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPress', () => true);
+    BackHandler.addEventListener('hardwareBackPress', () => true);
   }
 
   render() {
