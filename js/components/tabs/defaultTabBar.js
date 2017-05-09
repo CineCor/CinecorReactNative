@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import { connect }          from 'react-redux';
+import React, { Component } from 'react'
+import { connect }          from 'react-redux'
 import {
   Text, View, Animated,
-  TouchableOpacity
-}                           from 'react-native';
+  TouchableOpacity,
+  ViewPropTypes
+}                           from 'react-native'
 
-import myTheme               from '../../themes/base-theme';
+import myTheme              from '../../themes/base-theme'
 import styles               from './style'
 
 class DefaultTabBar extends Component {
@@ -16,28 +17,29 @@ class DefaultTabBar extends Component {
     activeTextColor: React.PropTypes.string,
     inactiveTextColor: React.PropTypes.string,
     textStyle: Text.propTypes.style,
-    tabStyle: View.propTypes.style,
+    tabStyle: ViewPropTypes.style,
     renderTab: React.PropTypes.func,
-    underlineStyle: View.propTypes.style
+    underlineStyle: ViewPropTypes.style
   }
 
 
   renderTab(name, page, isTabActive, onPressHandler) {
-    const { activeTextColor, inactiveTextColor } = this.props;
-    const textColor = isTabActive ? activeTextColor : inactiveTextColor;
-    const fontWeight = isTabActive ? 'bold' : 'normal';
+    const { activeTextColor, inactiveTextColor } = this.props
+    const textColor = isTabActive ? activeTextColor : inactiveTextColor
+    const fontWeight = isTabActive ? 'bold' : 'normal'
 
     return (
       <TouchableOpacity
         style={{ flex: 1 }}
         key={ name }
-        accessible={ true }
-        accessibilityLabel={ name }
-        accessibilityTraits='button'
         onPress={ () => onPressHandler( page ) }
       >
         <View style={ styles.tab }>
-          <Text style={ [{ color: textColor, fontWeight }] }>
+          <Text
+            style={ [{ color: textColor, fontWeight }, styles.tabName] }
+            ellipsizeMode="tail"
+            numberOfLines={2}
+          >
             { name }
           </Text>
         </View>
@@ -46,15 +48,15 @@ class DefaultTabBar extends Component {
   }
 
   render() {
-    const containerWidth = this.props.containerWidth;
-    const numberOfTabs = this.props.tabs.length;
+    const containerWidth = this.props.containerWidth
+    const numberOfTabs = this.props.tabs.length
     const tabUnderlineStyleWidth = {
       width: containerWidth / numberOfTabs
-    };
+    }
 
     const left = this.props.scrollValue.interpolate({
       inputRange: [0, 1 ], outputRange: [0,  containerWidth / numberOfTabs ],
-    });
+    })
 
     return (
       <View style={styles.tabsShadow}>
@@ -68,7 +70,7 @@ class DefaultTabBar extends Component {
           <Animated.View style={[tabUnderlineStyleWidth, { left }, styles.tabUnderlineStyle ]} />
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -77,6 +79,6 @@ const mapStateToProps = state => ({
   activeTextColor: myTheme.primary,
   inactiveTextColor: myTheme.primaryText,
   backgroundColor: myTheme.primary
-});
+})
 
-export default connect(mapStateToProps, null)(DefaultTabBar);
+export default connect(mapStateToProps, null)(DefaultTabBar)
