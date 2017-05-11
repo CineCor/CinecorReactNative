@@ -7,9 +7,13 @@ import Tabs                   from '../tabs'
 import  {
   View, Header, Button,
   Body, Title, Icon, Input,
-  Item, Left, Right,
-  Container
+  Item, Left, Right, Text
 } 														from 'native-base'
+
+import {
+  saveSearch,
+  clearSavedSearch
+} 			                      from '../../actions/search'
 
 
 class searchBar extends Component {
@@ -29,21 +33,41 @@ class searchBar extends Component {
         rounded
         toolbarInputColor={myTheme.light}
         iosBarStyle="light-content">
-        <Item>
+        <Item style={{backgroundColor: myTheme.light}}>
           <Icon name="ios-search" />
-          <Input placeholder="Search" />
+          <Input
+            placeholder={I18n.t('app.search')}
+            value={this.props.words}
+            onChangeText={(e) => this.search(e)}
+            blurOnSubmit={true} />
+          <Icon
+            name="md-close-circle"
+            style={{color: myTheme.secondaryText}}
+            onPress={this.clear.bind(this)} />
         </Item>
         <Button
           style={{marginRight: 10}}
           transparent
-          onPress={() => this.toggle()}>
-          <Icon
-            style={{color: myTheme.light, fontSize: 40}}
-            name="ios-close"
-          />
+          onPress={() => this.close()}>
+          <Text style={{color: myTheme.light}}>
+            { I18n.t('app.cancel') }
+          </Text>
         </Button>
       </Header>
     )
+  }
+
+  search(e) {
+    this.props.saveSearch(e.toLowerCase())
+  }
+
+  clear() {
+    return this.props.clearSavedSearch()
+  }
+
+  close() {
+    this.clear()
+    return this.toggle()
   }
 
   toggle() {
@@ -68,10 +92,9 @@ class searchBar extends Component {
               <Button
                 transparent
                 onPress={() => this.toggle()}>
-                  <Icon
-                    style={{color: myTheme.light}}
-                    name="ios-search"
-                  />
+                  <Text style={{color: myTheme.light}}>
+                    { I18n.t('app.search') }
+                  </Text>
               </Button>
           </Right>
       </Header>
@@ -83,4 +106,14 @@ class searchBar extends Component {
   }
 }
 
-export default searchBar
+const mapStateToProps = (state) => ({
+    words: state.search.words
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    saveSearch: (word) => dispatch(saveSearch(word)),
+    clearSavedSearch: () => dispatch(clearSavedSearch())
+});
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(searchBar);

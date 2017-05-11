@@ -1,5 +1,6 @@
 import * as Types from "../../types"
 
+
 export const fetchCinemas = () => ({
     type: Types.FETCH_CINEMAS
 })
