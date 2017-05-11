@@ -1,15 +1,12 @@
 
 import React, { Component }   from 'react'
-import Platform               from 'react-native'
 import { connect }            from 'react-redux'
 import I18n                   from 'react-native-i18n'
 import myTheme                from '../../themes/base-theme'
 import Tabs                   from '../tabs'
+import SearchBar              from '../searchBar'
 import  {
-  Container, Content,
-  Text, Header, Button,
-  Body, Title, Icon, Input,
-  InputGroup
+  Container, Content
 } 														from 'native-base'
 
 
@@ -19,15 +16,7 @@ class Index extends Component {
     return (
       <Container theme={ myTheme }>
         <Content>
-          <Header
-            style={{backgroundColor: myTheme.primary}}
-            searchBar
-            rounded
-            iosBarStyle="light-content">
-            <Body>
-              <Title style={{color: myTheme.light}}>Cinecor</Title>
-            </Body>
-          </Header>
+          <SearchBar />
           <Tabs />
         </Content>
       </Container>

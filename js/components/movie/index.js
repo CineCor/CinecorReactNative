@@ -21,7 +21,6 @@ class Movie extends Component {
     render() {
         const { image, title, hours } = this.props
 
-
         return (
             <TouchableOpacity
                 onPress={() => this.props.detail()}
