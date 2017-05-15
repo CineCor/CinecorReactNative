@@ -33,12 +33,13 @@ module.exports = StyleSheet.create({
     position: 'absolute',
     height: 4,
     backgroundColor: myTheme.primary,
-    bottom: 0
+    top: 0
   },
 	tabName: {
 		fontSize: 10,
     paddingLeft: 5,
     paddingRight: 5,
+    paddingTop: 2,
     textAlign: 'center'
 	}
 });

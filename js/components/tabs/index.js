@@ -20,8 +20,9 @@ import {
 import { signIn } 			      from '../../actions/login'
 import { isAuthenticated }    from '../../selectors'
 
+
 const height = Dimensions.get('window').height
-const width = Dimensions.get('window').width
+
 
 class Tabs extends Component {
   static propTypes = {
@@ -41,9 +42,7 @@ class Tabs extends Component {
   }
 
   render() {
-    const { isFetching, received, cinemas, tabs } = this.props
-    // if (isFetching) return <Loading/>
-    // if (!received) return <NotFound/>
+    const { tabs } = this.props
 
     return (
       <ScrollableTabView
@@ -77,8 +76,6 @@ const TAB_HEIGHT = 63
 
 const mapStateToProps = (state) => ({
     cinemas: state.cinemas.items,
-    isFetching: state.cinemas.isFetching,
-    received: state.cinemas.received,
     tabs: state.tabs.items,
     user: state.user,
 });

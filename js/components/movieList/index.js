@@ -3,7 +3,10 @@ import React, {
 }                               from "react"
 import { ListView, Text, View } from "react-native"
 import { connect }              from "react-redux"
+import I18n                     from 'react-native-i18n'
 
+import Loading                  from '../loading'
+import ErrorScreenView          from '../errorScreenView'
 import Movie                    from '../movie'
 import { filterCinemas }        from '../../selectors'
 
@@ -28,9 +31,18 @@ class MovieList extends Component {
     }
 
     render() {
-        const { received, isFetching, movies } = this.props
+        const { received, movies, searchWords } = this.props
 
-        if (!received || !movies) return null
+        if (!received) return <Loading />
+        
+        if (movies._cachedRowCount === 0 && searchWords.length > 0) {
+            return  (
+                <ErrorScreenView
+                    errorText={ I18n.t('app.emptySearch') }
+                    header='false'
+                />
+            )
+        }
 
         return (
             <View style={{flex: 1}}>
@@ -51,9 +63,9 @@ const dataSource = new ListView.DataSource({
 });
 
 const mapStateToProps = (state) => ({
-    isFetching: state.cinemas.isFetching,
-    received:   state.cinemas.received,
-    movies:     dataSource.cloneWithRows(filterCinemas(state))
+    searchWords:    state.search.words,
+    received:       state.cinemas.received,
+    movies:         dataSource.cloneWithRows(filterCinemas(state))
 })
 
 
