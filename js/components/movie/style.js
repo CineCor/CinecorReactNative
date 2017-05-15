@@ -25,7 +25,7 @@ module.exports = StyleSheet.create({
   textIntoImage: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    backgroundColor: 'rgba(120,120,120,0.3)',
     paddingLeft: 20,
     paddingRight: 20,
   },

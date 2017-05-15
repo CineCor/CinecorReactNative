@@ -23,8 +23,13 @@ const orderCinemas = cinemas => {
   return cinemas.sort((a, b) => a.id - b.id)
 }
 
+const isAuthenticated = user => {
+  return user.authenticated;
+}
+
 
 export {
   filterCinemas,
-  orderCinemas
+  orderCinemas,
+	isAuthenticated
 }

@@ -19,7 +19,7 @@ class MovieList extends Component {
         return (
             <Movie
                 id={movie.id}
-                image={movie.backdropImage}
+                image={movie.images.BACKDROP}
                 title={movie.title}
                 hours={movie.hours}
                 detail={() => this.detail(movie.id)}
@@ -56,9 +56,5 @@ const mapStateToProps = (state) => ({
     movies:     dataSource.cloneWithRows(filterCinemas(state))
 })
 
-// const mapDispatchToProps = (dispatch) => ({
-//
-// })
 
-
-export default connect(mapStateToProps, null)(MovieList)
+export default connect(mapStateToProps)(MovieList)

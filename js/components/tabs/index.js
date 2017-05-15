@@ -17,6 +17,8 @@ import {
   fetchCinemas,
   selectCinema
 } 			                      from '../../actions/cinemas'
+import { signIn } 			      from '../../actions/login'
+import { isAuthenticated }    from '../../selectors'
 
 const height = Dimensions.get('window').height
 const width = Dimensions.get('window').width
@@ -31,7 +33,7 @@ class Tabs extends Component {
   }
 
 	componentDidMount() {
-		this.props.fetchCinemas()
+      this.props.signIn()
 	}
 
   changeTab({i}) {
@@ -78,11 +80,12 @@ const mapStateToProps = (state) => ({
     isFetching: state.cinemas.isFetching,
     received: state.cinemas.received,
     tabs: state.tabs.items,
+    user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchCinemas: () => dispatch(fetchCinemas()),
     selectCinema: id => dispatch(selectCinema(id)),
+    signIn: () => dispatch(signIn()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tabs)

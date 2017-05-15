@@ -14,16 +14,6 @@ function cinemasPromise() {
   })
 }
 
-function replaceOriginalWidth(cinemas) {
-	cinemas.map(cinema => {
-		cinema.movies.map(movie => {
-		  movie.backdropImage = movie.backdropImage.replace('original', 'w780')
-    })
-	})
-
-  return cinemas
-}
-
 function tabsName(cinemas) {
   return cinemas.map(cinema => ({
     name: cinema.name,
@@ -35,8 +25,8 @@ function* fetchCinemas() {
     try {
       const cinemas = yield call(cinemasPromise)
       const cinemasOrdened = orderCinemas(cinemas.val())
-
-      yield put( actions.cinemasReceived( replaceOriginalWidth( cinemasOrdened ) ) )
+      console.log(cinemasOrdened);
+      yield put( actions.cinemasReceived( cinemasOrdened ) )
       yield put( actions.selectCinema(0) )
       yield put( actions.saveTabs( tabsName( cinemasOrdened ) ) )
     }
