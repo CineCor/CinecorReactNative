@@ -9,13 +9,16 @@ import Loading                  from '../loading'
 import ErrorScreenView          from '../errorScreenView'
 import Movie                    from '../movie'
 import { filterCinemas }        from '../../selectors'
+import { globalNav }            from '../../AppNavigator'
+import { selectMovie }          from '../../actions/movies'
 
 import styles from "./style"
 
 class MovieList extends Component {
 
     detail(id) {
-        console.log(id);
+        this.props.selectMovie(id)
+        globalNav.navigator.push({ id: "MovieDetail", passProps: { id } })
     }
 
     renderMovie(movie) {
@@ -34,7 +37,7 @@ class MovieList extends Component {
         const { received, movies, searchWords } = this.props
 
         if (!received) return <Loading />
-        
+
         if (movies._cachedRowCount === 0 && searchWords.length > 0) {
             return  (
                 <ErrorScreenView
@@ -60,7 +63,7 @@ class MovieList extends Component {
 
 const dataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
-});
+})
 
 const mapStateToProps = (state) => ({
     searchWords:    state.search.words,
@@ -68,5 +71,8 @@ const mapStateToProps = (state) => ({
     movies:         dataSource.cloneWithRows(filterCinemas(state))
 })
 
+const mapDispatchToProps = (dispatch) => ({
+    selectMovie: id => dispatch(selectMovie(id))
+});
 
-export default connect(mapStateToProps)(MovieList)
+export default connect(mapStateToProps, mapDispatchToProps)(MovieList)

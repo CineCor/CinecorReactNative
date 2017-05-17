@@ -10,6 +10,7 @@ import  {
   Body, Title, Icon, Input,
   Item, Left, Right, Text
 } 														from 'native-base'
+import { globalNav }          from '../../AppNavigator'
 
 import {
   saveSearch,
@@ -26,11 +27,34 @@ class searchBar extends Component {
     }
   }
 
+  getBackgroundColor() {
+    return this.props.backgroundColor || myTheme.primary
+  }
+
+  getTextColor() {
+    return this.props.titleColor || myTheme.light
+  }
+
+  back() {
+    globalNav.navigator.pop()
+		if (this.props.onBack) return this.props.onBack()
+  }
+
+  renderBack() {
+    return (
+      <Button
+        transparent
+        onPress={() => this.back()}>
+          <Icon name="arrow-back" size={25} style={{color: this.getTextColor()}} />
+      </Button>
+    )
+  }
+
   renderSearch() {
     return (
-      <Animatable.View ref="searchBarAnim" style={({height: (this.state.active) ? 64 : 0})}>
+      <Animatable.View ref="searchBarAnim" style={{height: (this.state.active) ? 64 : 0}}>
         <Header
-          style={{backgroundColor: myTheme.primary}}
+          style={{backgroundColor: this.getBackgroundColor()}}
           searchBar
           rounded
           toolbarInputColor={myTheme.light}
@@ -45,14 +69,14 @@ class searchBar extends Component {
   						autoFocus={this.state.active}/>
             <Icon
               name="md-close-circle"
-              style={{color: myTheme.secondaryText}}
+              color={myTheme.secondaryText}
               onPress={this.clear.bind(this)} />
           </Item>
           <Button
             style={{marginRight: 10}}
             transparent
             onPress={() => this.close()}>
-            <Text style={{color: myTheme.light}}>
+            <Text style={{color: this.getTextColor()}}>
               { I18n.t('app.cancel') }
             </Text>
           </Button>
@@ -62,23 +86,25 @@ class searchBar extends Component {
   }
 
   renderTitle() {
+    const { back, title, backgroundColor, titleColor } = this.props
     return (
-      <Animatable.View ref="barAnim" style={({height: (this.state.active) ? 0 : 64})}>
+      <Animatable.View ref="barAnim" style={{height: (this.state.active) ? 0 : 64, position: (this.state.active) ? 'absolute' : 'relative'}}>
         <Header
-          style={{backgroundColor: myTheme.primary}}
+          style={{backgroundColor: this.getBackgroundColor()}}
           iosBarStyle="light-content">
             <Left>
+              { ( back ) ? this.renderBack() : null }
             </Left>
-            <Body>
-              <Title style={{color: myTheme.light}}>
-                {I18n.t('title')}
+            <Body style={{flex: 2}}>
+              <Title style={{color: this.getTextColor()}}>
+                { title || I18n.t('title') }
               </Title>
             </Body>
             <Right>
                 <Button
                   transparent
                   onPress={() => this.open()}>
-                    <Text style={{color: myTheme.light}}>
+                    <Text style={{color: this.getTextColor()}}>
                       { I18n.t('app.search') }
                     </Text>
                 </Button>
@@ -126,7 +152,7 @@ class searchBar extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: myTheme.primary}}>
+      <View style={{backgroundColor: this.getBackgroundColor()}}>
       { this.renderSearch() }
       { this.renderTitle() }
       </View>

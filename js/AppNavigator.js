@@ -5,8 +5,7 @@ import Index                from './components/index/'
 import { statusBarColor }   from './themes/base-theme'
 import renderScene 					from './renderScene'
 import {
-  BackHandler, StatusBar,
-  View
+  StatusBar, View
 }                           from 'react-native'
 import { Navigator }        from 'react-native-deprecated-custom-components'
 
@@ -17,7 +16,6 @@ class AppNavigator extends Component {
 
 
   componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => true)
 		globalNav.navigator = this._navigator
   }
 
@@ -25,7 +23,7 @@ class AppNavigator extends Component {
     return (
       <Navigator
         ref={(ref) => { this._navigator = ref }}
-        configureScene={(route) => Navigator.SceneConfigs.FadeAndroid}
+        configureScene={(route) => Navigator.SceneConfigs.FloatFromRight}
         initialRoute={{ id: "Index" }}
         renderScene={ renderScene }
       />

@@ -14,3 +14,7 @@ export const SIGN_IN     		  		= "SIGN_IN"
 export const SIGN_IN_FAILED     	= "SIGN_IN_FAILED"
 export const SIGN_IN_SUCCESS     	= "SIGN_IN_SUCCESS"
 export const LOGIN   							= "LOGIN"
+
+// Movies
+export const SELECT_MOVIE     		= "SELECT_MOVIE"
+export const DESELECT_MOVIE     	= "DESELECT_MOVIE"

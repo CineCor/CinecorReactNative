@@ -24,12 +24,17 @@ const orderCinemas = cinemas => {
 }
 
 const isAuthenticated = user => {
-  return user.authenticated;
+  return user.authenticated
+}
+
+const getMovieById = (state, id) => {
+    return filterCinemas(state).filter(movie => movie.id === id)[0]
 }
 
 
 export {
   filterCinemas,
   orderCinemas,
-	isAuthenticated
+	isAuthenticated,
+  getMovieById
 }
