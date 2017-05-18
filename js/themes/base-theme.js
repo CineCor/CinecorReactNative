@@ -12,9 +12,10 @@ module.exports = {
     primaryText: "#212121",
     secondaryText: "#727272",
     divider: "#B6B6B6",
-    backgroundContentCards: "#E7E7E7",
+    backgroundContentCards: "#F5F5F5",
     headerBackground: "rgba(63, 81, 181, 0.5)",
     activeItemSidebar: "rgba(255, 255, 255, 0.5)",
+    yellow: "#FDD835",
 
     brandInfo: "#5bc0de",
     brandSuccess: "#5cb85c",

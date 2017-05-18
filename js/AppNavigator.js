@@ -23,7 +23,7 @@ class AppNavigator extends Component {
     return (
       <Navigator
         ref={(ref) => { this._navigator = ref }}
-        configureScene={(route) => Navigator.SceneConfigs.FloatFromRight}
+        configureScene={(route) => Navigator.SceneConfigs.FloatFromBottom}
         initialRoute={{ id: "Index" }}
         renderScene={ renderScene }
       />

@@ -26,8 +26,7 @@ module.exports = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: 'rgba(120,120,120,0.3)',
-    paddingLeft: 20,
-    paddingRight: 20,
+    padding: 20
   },
   title: {
     fontSize: 20,

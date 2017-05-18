@@ -5,7 +5,6 @@ import {
     ListView, Text, View,
     Image, TouchableOpacity
 }                               from "react-native"
-
 import myTheme                  from '../../themes/base-theme'
 import styles                   from "./style"
 

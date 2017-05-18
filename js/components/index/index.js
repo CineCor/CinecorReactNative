@@ -15,8 +15,8 @@ class Index extends Component {
   render() {
     return (
       <Container theme={ myTheme }>
+        <SearchBar search={true} />
         <Content>
-          <SearchBar />
           <Tabs />
         </Content>
       </Container>

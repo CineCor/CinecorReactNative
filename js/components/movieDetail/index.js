@@ -2,15 +2,17 @@
 import React, { Component }   from 'react'
 import { connect }            from 'react-redux'
 import I18n                   from 'react-native-i18n'
+import { Image }              from 'react-native'
+import  {
+  Container, Content,
+  Text, View, Icon
+} 														from 'native-base'
 import myTheme                from '../../themes/base-theme'
 import Tabs                   from '../tabs'
 import SearchBar              from '../searchBar'
-import  {
-  Container, Content,
-  Text
-} 														from 'native-base'
 import { deselectMovie }      from '../../actions/movies'
 import { getMovieById }       from '../../selectors'
+import styles                 from './style'
 
 
 class MovieDetail extends Component {
@@ -19,19 +21,75 @@ class MovieDetail extends Component {
     return this.props.deselectMovie()
   }
 
-  render() {
-    return (
-      <Container theme={ myTheme }>
-        <Content>
-          <SearchBar
-            back={true}
-            title={this.props.movie.title}
-            backgroundColor={this.props.movie.colors.MAIN} 
-            titleColor={this.props.movie.colors.TITLE_TEXT}
-          />
-          <Text>
-
+  renderGenres() {
+    return this.props.movie.genres.map((genre, i) => {
+      return (
+        <View key={i} style={styles.genresBubble}>
+          <Text style={styles.genresText}>
+            { genre }
           </Text>
+        </View>
+      )
+    })
+  }
+
+  render() {
+		const { movie } = this.props
+		console.log(movie);
+    return (
+      <Container theme={ myTheme } style={styles.mainContainer}>
+        <SearchBar
+          back={true}
+          search={false}
+          title={movie.title}
+          backgroundColor={movie.colors.MAIN}
+          titleColor={movie.colors.TITLE_TEXT}
+        />
+        <Content>
+          <Image
+            style={styles.image}
+            source={{uri: movie.images.BACKDROP}}
+          />
+          <View style={styles.movieData}>
+            <View
+              shadowColor={myTheme.secondaryText}
+              shadowOffset={{width: 1, height: 1}}
+              shadowOpacity={1}
+              shadowRadius={10}>
+              <Image
+                style={styles.poster}
+                source={{uri: movie.images.POSTER}}
+              />
+            </View>
+            <View style={styles.movieDataContainer}>
+              <Text style={styles.releaseDate}>
+                { new Date(movie.releaseDate).toDateString() }
+              </Text>
+
+              <Text style={styles.duration}>
+                { movie.duration } { I18n.t('app.movie.mins') }
+              </Text>
+
+              <View style={styles.ratingContainer}>
+                <Icon name="ios-star" style={styles.ratingStar} />
+                <Text style={styles.rating}>
+                  { movie.rating.toFixed(1) }
+                </Text>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.container}>
+            <View style={styles.genresContainer}>
+            { this.renderGenres() }
+            </View>
+
+            <View style={styles.body}>
+              <Text>
+               { movie.overview }
+              </Text>
+            </View>
+          </View>
         </Content>
       </Container>
     )

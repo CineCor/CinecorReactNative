@@ -9,7 +9,13 @@ I18n.translations = {
       search: "Buscar",
       cancel: "Cancelar",
 			errorText: "Ups, algo salió mal",
-			emptySearch: "Ups, no se encontraron resultados"
+			emptySearch: "Ups, no se encontraron resultados",
+			movie: {
+				duration: "Duración: ",
+        mins: "mins",
+        genres: "Géneros: ",
+        releaseDate: "Fecha de estreno: "
+			}
     }
   },
   en: {
@@ -18,7 +24,13 @@ I18n.translations = {
       search: "Search",
       cancel: "Cancel",
 			errorText: "Oops, something went wrong",
-			emptySearch: "Oops, no results were found"
+			emptySearch: "Oops, no results were found",
+			movie: {
+				duration: "Duration: ",
+        mins: "mins",
+        genres: "Genres: ",
+        releaseDate: "Release date: "
+			}
     }
   }
 }

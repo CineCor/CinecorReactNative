@@ -50,7 +50,7 @@ class Tabs extends Component {
         initialPage={0}
         renderTabBar={() => <DefaultTabBar />}
         onChangeTab={i => this.changeTab(i)}
-        prerenderingSiblingsNumber={0}
+        prerenderingSiblingsNumber={3}
         tabBarPosition='bottom'
         tabBarTextStyle={{flex: 1}}
       >

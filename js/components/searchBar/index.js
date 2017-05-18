@@ -86,7 +86,7 @@ class searchBar extends Component {
   }
 
   renderTitle() {
-    const { back, title, backgroundColor, titleColor } = this.props
+    const { back, title, backgroundColor, titleColor, search } = this.props
     return (
       <Animatable.View ref="barAnim" style={{height: (this.state.active) ? 0 : 64, position: (this.state.active) ? 'absolute' : 'relative'}}>
         <Header
@@ -95,12 +95,13 @@ class searchBar extends Component {
             <Left>
               { ( back ) ? this.renderBack() : null }
             </Left>
-            <Body style={{flex: 2}}>
+            <Body style={{flex: (search) ? 2 : 5}}>
               <Title style={{color: this.getTextColor()}}>
                 { title || I18n.t('title') }
               </Title>
             </Body>
             <Right>
+              { (this.props.search) ?
                 <Button
                   transparent
                   onPress={() => this.open()}>
@@ -108,6 +109,9 @@ class searchBar extends Component {
                       { I18n.t('app.search') }
                     </Text>
                 </Button>
+                :
+                null
+              }
             </Right>
         </Header>
       </Animatable.View>
@@ -153,7 +157,7 @@ class searchBar extends Component {
   render() {
     return (
       <View style={{backgroundColor: this.getBackgroundColor()}}>
-      { this.renderSearch() }
+      { (this.props.search) ? this.renderSearch() : null }
       { this.renderTitle() }
       </View>
     )
