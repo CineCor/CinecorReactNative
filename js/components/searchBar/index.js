@@ -10,13 +10,18 @@ import  {
   Body, Title, Icon, Input,
   Item, Left, Right, Text
 } 														from 'native-base'
+import {
+  Image, StatusBar,
+  Dimensions
+}                             from 'react-native'
 import { globalNav }          from '../../AppNavigator'
-
 import {
   saveSearch,
   clearSavedSearch
 } 			                      from '../../actions/search'
 
+
+const { width }               = Dimensions.get('window')
 
 class searchBar extends Component {
 
@@ -28,11 +33,11 @@ class searchBar extends Component {
   }
 
   getBackgroundColor() {
-    return this.props.backgroundColor || myTheme.primary
+    return this.props.backgroundColor || myTheme.light
   }
 
   getTextColor() {
-    return this.props.titleColor || myTheme.light
+    return this.props.titleColor || myTheme.primary
   }
 
   back() {
@@ -52,14 +57,14 @@ class searchBar extends Component {
 
   renderSearch() {
     return (
-      <Animatable.View ref="searchBarAnim" style={{height: (this.state.active) ? 64 : 0}}>
+      <Animatable.View ref="searchBarAnim" style={{position: 'absolute', right: -width, zIndex: 3, width: width}}>
         <Header
           style={{backgroundColor: this.getBackgroundColor()}}
           searchBar
           rounded
           toolbarInputColor={myTheme.light}
           iosBarStyle="light-content">
-          <Item style={{backgroundColor: myTheme.light}}>
+          <Item style={{backgroundColor: myTheme.backgroundSearcher}}>
             <Icon name="ios-search" />
             <Input
               placeholder={I18n.t('app.search')}
@@ -85,10 +90,25 @@ class searchBar extends Component {
     )
   }
 
+  renderLogo(title) {
+    return (title) ? (
+        <Text style={{color: this.getTextColor()}}>
+          { title }
+        </Text>
+      )
+      :
+      (
+        <Image
+          style={{width: 28, height: 32, marginTop: 5}}
+          source={require('../../images/cinecor.png')}>
+        </Image>
+      )
+  }
+
   renderTitle() {
     const { back, title, backgroundColor, titleColor, search } = this.props
     return (
-      <Animatable.View ref="barAnim" style={{height: (this.state.active) ? 0 : 64, position: (this.state.active) ? 'absolute' : 'relative'}}>
+      <Animatable.View ref="barAnim">
         <Header
           style={{backgroundColor: this.getBackgroundColor()}}
           iosBarStyle="light-content">
@@ -96,8 +116,8 @@ class searchBar extends Component {
               { ( back ) ? this.renderBack() : null }
             </Left>
             <Body style={{flex: (search) ? 2 : 5}}>
-              <Title style={{color: this.getTextColor()}}>
-                { title || I18n.t('title') }
+              <Title>
+                { this.renderLogo(title) }
               </Title>
             </Body>
             <Right>
@@ -143,22 +163,42 @@ class searchBar extends Component {
 
   toggle() {
       if (this.state.active) {
-        this.refs.searchBarAnim.slideOutUp(500)
+        this.refs.searchBarAnim.transition(
+          {left: 0}, 
+          {left: width},
+          500
+        )
         this.refs.barAnim.fadeIn(100)
       }
       else {
         this.refs.barAnim.fadeOut(500)
-        this.refs.searchBarAnim.slideInDown(500)
+        this.refs.searchBarAnim.transition(
+          {left: width},
+          {left: 0},
+          500
+        )
       }
       this.toggleActive()
+  }
+
+  setStatusBarColor() {
+    const statusBarColor = (this.getTextColor() === myTheme.light) ? 'light-content' : 'dark-content'
+
+    return (
+      <StatusBar
+        barStyle={statusBarColor}
+        animated={true}
+      />
+    )
   }
 
 
   render() {
     return (
-      <View style={{backgroundColor: this.getBackgroundColor()}}>
+      <View style={{ backgroundColor: this.getBackgroundColor() }}>
       { (this.props.search) ? this.renderSearch() : null }
       { this.renderTitle() }
+      { this.setStatusBarColor() }
       </View>
     )
   }

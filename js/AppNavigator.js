@@ -2,10 +2,9 @@
 import React, { Component } from 'react'
 import { connect }          from 'react-redux'
 import Index                from './components/index/'
-import { statusBarColor }   from './themes/base-theme'
 import renderScene 					from './renderScene'
 import {
-  StatusBar, View
+  View
 }                           from 'react-native'
 import { Navigator }        from 'react-native-deprecated-custom-components'
 
