@@ -42,10 +42,11 @@ class MovieList extends Component {
 
     render() {
         const { received, movies, searchWords } = this.props
-        const dataSource = this.state.dataSource.cloneWithRows(movies)
 
         if (!received) return <Loading />
 
+        const dataSource = this.state.dataSource.cloneWithRows(movies)
+        
         if (dataSource._cachedRowCount === 0 && searchWords.length > 0) {
             return  (
                 <ErrorScreenView

@@ -63,10 +63,7 @@ class Tabs extends Component {
             return (
               <ScrollView tabLabel={item.name} key={i}>
       					<View>
-                  { (cinemas.length > 0) ?
-                    <MovieList movies={cinemas[i].movies} />
-                    : null
-                  }
+                  <MovieList movies={cinemas[i]} />
       					</View>
               </ScrollView>
             )

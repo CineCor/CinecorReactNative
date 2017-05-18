@@ -12,11 +12,11 @@ const filterCinemas = createSelector(
   (cinemas, received, words) => {
     if (!received) return []
 
-    cinemas.map(cinema => {
+    const cinemasWithMoviesFiltered = cinemas.map(cinema => {
 			return cinema.movies.filter( movie => movie.title.toLowerCase().indexOf(words) != -1)
 		})
 
-    return cinemas
+    return cinemasWithMoviesFiltered
   }
 )
 
