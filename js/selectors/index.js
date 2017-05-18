@@ -7,17 +7,26 @@ const searchedWords = state => state.search.words
 
 const filterCinemas = createSelector(
   cinemasSelector,
-	cinemasSelectedIdSelector,
   isReceived,
   searchedWords,
-  (cinemas, id, received, words) => {
+  (cinemas, received, words) => {
     if (!received) return []
 
-    const moviesOfSelectedCinema = cinemas.filter(cinema => cinema.id === id)[0].movies
+    cinemas.map(cinema => {
+			return cinema.movies.filter( movie => movie.title.toLowerCase().indexOf(words) != -1)
+		})
 
-    return moviesOfSelectedCinema.filter( movie => movie.title.toLowerCase().indexOf(words) != -1)
+    return cinemas
   }
 )
+
+const filterCinemasByTab = createSelector(
+  cinemasSelector,
+  cinemasSelectedIdSelector,
+  (cinemas, id) =>{
+  return cinemas.filter(cinema => cinema.id === id)[0]
+})
+
 
 const orderCinemas = cinemas => {
   return cinemas.sort((a, b) => a.id - b.id)
@@ -28,7 +37,7 @@ const isAuthenticated = user => {
 }
 
 const getMovieById = (state, id) => {
-    return filterCinemas(state).filter(movie => movie.id === id)[0]
+    return filterCinemasByTab(state).movies.filter(movie => movie.id === id)[0]
 }
 
 

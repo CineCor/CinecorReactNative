@@ -8,13 +8,20 @@ import I18n                     from 'react-native-i18n'
 import Loading                  from '../loading'
 import ErrorScreenView          from '../errorScreenView'
 import Movie                    from '../movie'
-import { filterCinemas }        from '../../selectors'
 import { globalNav }            from '../../AppNavigator'
 import { selectMovie }          from '../../actions/movies'
 
 import styles from "./style"
 
 class MovieList extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            dataSource: new ListView.DataSource({
+                rowHasChanged: (r1, r2) => r1 !== r2,
+            })
+        }
+    }
 
     detail(id) {
         this.props.selectMovie(id)
@@ -35,10 +42,11 @@ class MovieList extends Component {
 
     render() {
         const { received, movies, searchWords } = this.props
+        const dataSource = this.state.dataSource.cloneWithRows(movies)
 
         if (!received) return <Loading />
 
-        if (movies._cachedRowCount === 0 && searchWords.length > 0) {
+        if (dataSource._cachedRowCount === 0 && searchWords.length > 0) {
             return  (
                 <ErrorScreenView
                     errorText={ I18n.t('app.emptySearch') }
@@ -52,7 +60,7 @@ class MovieList extends Component {
                 <ListView
                     style={{backgroundColor: "#f4f4f4"}}
                     enableEmptySections={true}
-                    dataSource={movies}
+                    dataSource={dataSource}
                     style={styles.listView}
                     renderRow={this.renderMovie.bind(this)}
                 />
@@ -61,14 +69,9 @@ class MovieList extends Component {
     }
 }
 
-const dataSource = new ListView.DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-})
-
 const mapStateToProps = (state) => ({
     searchWords:    state.search.words,
-    received:       state.cinemas.received,
-    movies:         dataSource.cloneWithRows(filterCinemas(state))
+    received:       state.cinemas.received
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -35,7 +35,7 @@ class MovieDetail extends Component {
 
   render() {
 		const { movie } = this.props
-		console.log(movie);
+
     return (
       <Container theme={ myTheme } style={styles.mainContainer}>
         <SearchBar

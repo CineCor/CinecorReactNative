@@ -18,7 +18,10 @@ import {
   selectCinema
 } 			                      from '../../actions/cinemas'
 import { signIn } 			      from '../../actions/login'
-import { isAuthenticated }    from '../../selectors'
+import {
+  isAuthenticated,
+  filterCinemas
+}                             from '../../selectors'
 
 
 const height = Dimensions.get('window').height
@@ -38,11 +41,11 @@ class Tabs extends Component {
 	}
 
   changeTab({i}) {
-    this.props.selectCinema( this.props.cinemas[i].id )
+    this.props.selectCinema( this.props.tabs[i].id )
   }
 
   render() {
-    const { tabs } = this.props
+    const { tabs, cinemas } = this.props
 
     return (
       <ScrollableTabView
@@ -60,7 +63,10 @@ class Tabs extends Component {
             return (
               <ScrollView tabLabel={item.name} key={i}>
       					<View>
-                  <MovieList />
+                  { (cinemas.length > 0) ?
+                    <MovieList movies={cinemas[i].movies} />
+                    : null
+                  }
       					</View>
               </ScrollView>
             )
@@ -75,7 +81,7 @@ class Tabs extends Component {
 const TAB_HEIGHT = 63
 
 const mapStateToProps = (state) => ({
-    cinemas: state.cinemas.items,
+    cinemas: filterCinemas(state),
     tabs: state.tabs.items,
     user: state.user,
 });
