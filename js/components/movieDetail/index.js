@@ -48,6 +48,7 @@ class MovieDetail extends Component {
         <Content>
           <Image
             style={styles.image}
+            defaultSource={require('../../images/backdrop.png')}
             source={{uri: movie.images.BACKDROP}}
           />
           <View style={styles.movieData}>
@@ -55,9 +56,11 @@ class MovieDetail extends Component {
               shadowColor={myTheme.secondaryText}
               shadowOffset={{width: 1, height: 1}}
               shadowOpacity={1}
-              shadowRadius={10}>
+              shadowRadius={10}
+              style={styles.poster}>
               <Image
-                style={styles.poster}
+                style={{flex:1}}
+                defaultSource={require('../../images/cinecor.png')}
                 source={{uri: movie.images.POSTER}}
               />
             </View>

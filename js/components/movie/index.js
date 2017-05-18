@@ -27,7 +27,8 @@ class Movie extends Component {
                 underlayColor={myTheme.primary}>
                 <View style={styles.containerList}>
                     <Image
-                        source={{uri: image, cache: 'reload'}}
+                        source={{uri: image}}
+                        defaultSource={require('../../images/backdrop.png')}
                         style={styles.image}>
                         <View style={styles.textIntoImage}>
                             <Text

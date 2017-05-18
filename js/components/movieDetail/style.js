@@ -15,7 +15,8 @@ export default styles = {
 		width: width / 4.3,
 		height: width / 3,
 		marginLeft: 30,
-		marginTop: -20
+		marginTop: -20,
+		backgroundColor: myTheme.light
 	},
 	movieData: {
 		flexDirection: 'row'
