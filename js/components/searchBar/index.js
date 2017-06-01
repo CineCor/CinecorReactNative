@@ -112,7 +112,7 @@ class searchBar extends Component {
         <Header
           style={{backgroundColor: this.getBackgroundColor()}}
           iosBarStyle="light-content">
-            <Left>
+            <Left style={{flex: (back) ? 1 : 2}}>
               { ( back ) ? this.renderBack() : null }
             </Left>
             <Body style={{flex: (search) ? 2 : 5}}>
@@ -120,7 +120,7 @@ class searchBar extends Component {
                 { this.renderLogo(title) }
               </Title>
             </Body>
-            <Right>
+            <Right style={{flex: (back) ? 1 : 2}}>
               { (this.props.search) ?
                 <Button
                   transparent
@@ -164,7 +164,7 @@ class searchBar extends Component {
   toggle() {
       if (this.state.active) {
         this.refs.searchBarAnim.transition(
-          {left: 0}, 
+          {left: 0},
           {left: width},
           500
         )
