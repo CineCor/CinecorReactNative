@@ -43,7 +43,7 @@ class MovieDetail extends Component {
           search={false}
           title={movie.title}
           backgroundColor={movie.colors.MAIN}
-          titleColor={movie.colors.TITLE_TEXT}
+          titleColor={movie.colors.TITLE}
         />
         <Content>
           <Image

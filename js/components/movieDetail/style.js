@@ -31,7 +31,6 @@ export default styles = {
 		paddingLeft: 30
 	},
 	genresContainer: {
-		flex: 1,
 		flexDirection: 'row',
 		flexWrap: 'wrap',
 	},
@@ -39,8 +38,8 @@ export default styles = {
 		backgroundColor: myTheme.divider,
 		paddingTop: 5,
 		paddingBottom: 5,
-		paddingLeft: 10,
-		paddingRight: 10,
+		paddingLeft: 11,
+		paddingRight: 11,
 		marginRight: 5,
 		marginBottom: 5,
 		borderRadius: 100,
