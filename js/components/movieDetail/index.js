@@ -1,21 +1,27 @@
 
-import React, { Component }   from 'react'
-import { connect }            from 'react-redux'
-import I18n                   from 'react-native-i18n'
-import { Image }              from 'react-native'
+import React, {
+    Component, PropTypes as PT
+}                               from "react"
+import { connect }              from 'react-redux'
+import I18n                     from 'react-native-i18n'
+import { Image }                from 'react-native'
 import  {
   Container, Content,
   Text, View, Icon
-} 														from 'native-base'
-import myTheme                from '../../themes/base-theme'
-import Tabs                   from '../tabs'
-import SearchBar              from '../searchBar'
-import { deselectMovie }      from '../../actions/movies'
-import { getMovieById }       from '../../selectors'
-import styles                 from './style'
+} 														  from 'native-base'
+import myTheme                  from '../../themes/base-theme'
+import Tabs                     from '../tabs'
+import SearchBar                from '../searchBar'
+import { deselectMovie }        from '../../actions/movies'
+import { getMovieById }         from '../../selectors'
+import styles                   from './style'
 
 
 class MovieDetail extends Component {
+	static propTypes = {
+    movie:          PT.object,
+    deselectMovie:  PT.func
+  }
 
   componentWillUnmount() {
     return this.props.deselectMovie()

@@ -10,19 +10,18 @@ import styles                   from "./style"
 
 class Movie extends Component {
     static propTypes = {
-        id: PT.number,
-        image: PT.string,
-        title: PT.string,
-        hours: PT.array,
+        image:  PT.string,
+        title:  PT.string,
+        hours:  PT.array,
         detail: PT.func
     }
 
     render() {
-        const { image, title, hours } = this.props
+        const { image, title, hours, detail } = this.props
 
         return (
             <TouchableOpacity
-                onPress={() => this.props.detail()}
+                onPress={() => detail()}
                 activeOpacity={OPACITY}
                 underlayColor={myTheme.primary}>
                 <View style={styles.containerList}>
@@ -60,11 +59,5 @@ class Movie extends Component {
 }
 
 const OPACITY = 0.75
-
-const mapStateToProps = (state) => ({
-    isFetching: state.cinemas.isFetching,
-    received: state.cinemas.received
-})
-
 
 export default Movie

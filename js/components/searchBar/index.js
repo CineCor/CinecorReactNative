@@ -1,29 +1,43 @@
 
-import React, { Component }   from 'react'
-import { connect }            from 'react-redux'
-import I18n                   from 'react-native-i18n'
-import * as Animatable        from 'react-native-animatable'
-import myTheme                from '../../themes/base-theme'
-import Tabs                   from '../tabs'
+import React, {
+    Component, PropTypes as PT
+}                               from "react"
+import { connect }              from 'react-redux'
+import I18n                     from 'react-native-i18n'
+import * as Animatable          from 'react-native-animatable'
+import myTheme                  from '../../themes/base-theme'
+import Tabs                     from '../tabs'
 import  {
   View, Header, Button,
   Body, Title, Icon, Input,
   Item, Left, Right, Text
-} 														from 'native-base'
+} 														  from 'native-base'
 import {
   Image, StatusBar,
   Dimensions
-}                             from 'react-native'
-import { globalNav }          from '../../AppNavigator'
+}                               from 'react-native'
+import { globalNav }            from '../../AppNavigator'
 import {
   saveSearch,
   clearSavedSearch
-} 			                      from '../../actions/search'
+} 			                        from '../../actions/search'
 
 
-const { width }               = Dimensions.get('window')
+const { width }                 = Dimensions.get('window')
 
 class searchBar extends Component {
+	static propTypes = {
+    backgroundColor:  PT.string,
+    titleColor:       PT.string,
+    onBack:           PT.func,
+    words:            PT.string,
+    clearSavedSearch: PT.func,
+    back:             PT.bool,
+    title:            PT.string,
+    search:           PT.bool,
+    saveSearch:       PT.func,
+    clearSavedSearch: PT.func,
+  }
 
   constructor(props) {
     super(props)
@@ -121,7 +135,7 @@ class searchBar extends Component {
               </Title>
             </Body>
             <Right style={{flex: (back) ? 1 : 2}}>
-              { (this.props.search) ?
+              { (search) ?
                 <Button
                   transparent
                   onPress={() => this.open()}>

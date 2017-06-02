@@ -53,5 +53,7 @@ fastlane/Preview.html
 fastlane/screenshots
 
 
+ios/GoogleService-Info.plist
+GoogleService-Info.plist
 
-js/secret.json
+ios/Pods/

@@ -5,6 +5,7 @@ import App                  from './App'
 import configureStore       from './configureStore'
 import I18n                 from 'react-native-i18n'
 import translations         from './translations'
+import firebase							from './firebase'
 
 function setup():React.Component {
   class Root extends Component {
@@ -16,6 +17,7 @@ function setup():React.Component {
         store: configureStore(() => this.setState({ isLoading: false })),
       }
 			console.disableYellowBox = true;
+			firebase.analytics().setAnalyticsCollectionEnabled(true);
     }
 
     render() {

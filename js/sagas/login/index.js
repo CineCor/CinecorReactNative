@@ -3,30 +3,34 @@ import { call, put }            from 'redux-saga/effects'
 import * as cinemaActions       from '../../actions/cinemas'
 import * as loginActions       	from '../../actions/login'
 import * as Types               from '../../types'
-import firebase                 from 'firebase'
+import firebase 							  from '../../firebase'
 
 
 function signInAnonymously() {
-  const database = firebase.database()
+  const isAuthenticated = firebase.auth().authenticated
+  if (isAuthenticated) {
+    return firebase.auth().currentUser
+  }
   return firebase.auth().signInAnonymously()
 }
 
 function* signIn() {
-    try {
-      const user = yield call(signInAnonymously)
+  try {
+    const user = yield call(signInAnonymously)
 
-      if (user) {
-        yield put( loginActions.signInSuccess(user) )
-        yield put( cinemaActions.fetchCinemas() )
-      }
+    if (user) {
+      yield put( loginActions.signInSuccess(user) )
+      yield put( cinemaActions.fetchCinemas() )
+      yield call( firebase.analytics().setUserId, user.uid )
     }
-    catch (error) {
-        console.log(error)
-    }
+  }
+  catch (error) {
+    console.log(error)
+  }
 }
 
 function* watchSignIn() {
-    yield* takeEvery(Types.SIGN_IN, signIn)
+  yield* takeEvery(Types.SIGN_IN, signIn)
 }
 
 export default watchSignIn

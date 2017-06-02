@@ -1,25 +1,27 @@
-import React, { Component } from 'react'
-import { connect }          from 'react-redux'
+import React, {
+    Component, PropTypes as PT
+}                               from "react"
+import { connect }          		from 'react-redux'
 import {
   Text, View, Animated,
   TouchableOpacity,
   ViewPropTypes
-}                           from 'react-native'
+}                           		from 'react-native'
 
-import myTheme              from '../../themes/base-theme'
-import styles               from './style'
+import myTheme              		from '../../themes/base-theme'
+import styles               		from './style'
 
 class DefaultTabBar extends Component {
   static propTypes = {
-    goToPage: React.PropTypes.func,
-    activeTab: React.PropTypes.number,
-    tabs: React.PropTypes.array,
-    activeTextColor: React.PropTypes.string,
-    inactiveTextColor: React.PropTypes.string,
-    textStyle: Text.propTypes.style,
-    tabStyle: ViewPropTypes.style,
-    renderTab: React.PropTypes.func,
-    underlineStyle: ViewPropTypes.style
+    goToPage: 					PT.func,
+    activeTab: 					PT.number,
+    tabs: 							PT.array,
+    activeTextColor: 		PT.string,
+    inactiveTextColor: 	PT.string,
+    textStyle: 					Text.propTypes.style,
+    tabStyle: 					ViewPropTypes.style,
+    renderTab: 					PT.func,
+    underlineStyle: 		ViewPropTypes.style
   }
 
 

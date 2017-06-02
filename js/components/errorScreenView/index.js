@@ -1,5 +1,7 @@
 
-import React, { Component }   from 'react'
+import React, {
+  Component, PropTypes as PT
+}                             from 'react'
 import { connect }            from 'react-redux'
 import I18n                   from 'react-native-i18n'
 import myTheme                from '../../themes/base-theme'
@@ -11,6 +13,10 @@ import  {
 
 
 class ErrorScreenView extends Component {
+	static propTypes = {
+		header:    PT.bool,
+		errorText: PT.string
+	}
 
   renderHeader() {
     return (

@@ -3,7 +3,7 @@ import { call, put }            from 'redux-saga/effects'
 import * as actions             from '../../actions/cinemas'
 import * as Types               from '../../types'
 import { orderCinemas }         from '../../selectors'
-import firebase                 from 'firebase'
+import firebase                 from '../../firebase'
 
 
 function cinemasPromise() {

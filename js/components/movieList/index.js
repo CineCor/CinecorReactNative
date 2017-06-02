@@ -10,10 +10,18 @@ import ErrorScreenView          from '../errorScreenView'
 import Movie                    from '../movie'
 import { globalNav }            from '../../AppNavigator'
 import { selectMovie }          from '../../actions/movies'
+import firebase                 from '../../firebase'
 
-import styles from "./style"
+import styles                   from "./style"
 
 class MovieList extends Component {
+    static propTypes = {
+        received:       PT.bool,
+        movies:         PT.array,
+        searchWords:    PT.string,
+        selectMovie:    PT.func
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -23,7 +31,9 @@ class MovieList extends Component {
         }
     }
 
-    detail(id) {
+    detail(movie) {
+        const { title, id } = movie
+        firebase.analytics().setCurrentScreen(title)
         this.props.selectMovie(id)
         globalNav.navigator.push({ id: "MovieDetail", passProps: { id } })
     }
@@ -31,11 +41,10 @@ class MovieList extends Component {
     renderMovie(movie) {
         return (
             <Movie
-                id={movie.id}
                 image={movie.images.BACKDROP}
                 title={movie.title}
                 hours={movie.hours}
-                detail={() => this.detail(movie.id)}
+                detail={() => this.detail(movie)}
             />
         )
     }
@@ -46,7 +55,7 @@ class MovieList extends Component {
         if (!received) return <Loading />
 
         const dataSource = this.state.dataSource.cloneWithRows(movies)
-        
+
         if (dataSource._cachedRowCount === 0 && searchWords.length > 0) {
             return  (
                 <ErrorScreenView
