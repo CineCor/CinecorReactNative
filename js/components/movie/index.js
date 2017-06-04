@@ -43,7 +43,7 @@ class Movie extends Component {
                                         hours.map((hour, i) => {
                                             const date = new Date(hour)
                                             const hourFormated = date.getHours()
-                                            const minutesFormated = date.getHours()
+                                            const minutesFormated = date.getMinutes()
                                             const time = `${hourFormated}:${minutesFormated}   `
                                             return time
                                         })
