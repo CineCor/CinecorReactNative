@@ -7,12 +7,14 @@ import  {
 	Spinner
 } 														from 'native-base'
 
+import { Dimensions }	from 'react-native'
+const { width }		  = Dimensions.get('window')
 
 class Loading extends Component {
 
   render() {
     return (
-      <Container theme={ myTheme }>
+      <Container theme={ myTheme } style={{width}}>
 				<Content>
 						<Spinner color={myTheme.primary} />
 				</Content>
