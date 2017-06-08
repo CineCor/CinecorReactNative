@@ -33,6 +33,14 @@ export default styles = {
 	genresContainer: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
+		marginTop: 5,
+		marginBottom: 5
+	},
+	hoursContainer: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		marginTop: 5,
+		marginBottom: 5
 	},
 	genresBubble: {
 		backgroundColor: myTheme.divider,
