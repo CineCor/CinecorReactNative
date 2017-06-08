@@ -24,7 +24,7 @@ function tabsName(cinemas) {
 function* fetchCinemas() {
     try {
       const cinemas = yield call(cinemasPromise)
-      const cinemasOrdened = orderCinemas(cinemas.val())
+      const cinemasOrdened = cinemas.val()
 
       yield put( actions.cinemasReceived( cinemasOrdened ) )
       yield put( actions.selectCinema(0) )

@@ -28,10 +28,6 @@ const filterCinemasByTab = createSelector(
 })
 
 
-const orderCinemas = cinemas => {
-  return cinemas.sort((a, b) => a.id - b.id)
-}
-
 const isAuthenticated = user => {
   return user.authenticated
 }
@@ -43,7 +39,6 @@ const getMovieById = (state, id) => {
 
 export {
   filterCinemas,
-  orderCinemas,
 	isAuthenticated,
   getMovieById
 }
