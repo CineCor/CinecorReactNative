@@ -6,6 +6,7 @@ import { connect }            from 'react-redux'
 import myTheme                from '../../themes/base-theme'
 import DefaultTabBar          from './defaultTabBar'
 import MovieList              from '../movieList'
+import Loading                from '../loading'
 import {
   View, Text, ScrollView,
   Dimensions
@@ -41,36 +42,40 @@ class Tabs extends Component {
 	}
 
   changeTab({i}) {
-    this.props.selectCinema( this.props.tabs[i].id )
+    this.props.selectCinema( i )
   }
 
   render() {
     const { tabs, cinemas } = this.props
 
+		if (tabs.length === 0) return <Loading />
+
     return (
-      <ScrollableTabView
-        style={{ height: height - TAB_HEIGHT }}
-        initialPage={0}
-        renderTabBar={() => <DefaultTabBar />}
-        onChangeTab={i => this.changeTab(i)}
-        prerenderingSiblingsNumber={3}
-        tabBarPosition='bottom'
-        tabBarTextStyle={{flex: 1}}
-      >
+		<View style={{flex: 1,justifyContent: 'center',alignItems: 'center',backgroundColor: '#F5FCFF',}}>
+	      <ScrollableTabView
+	        style={{ height: height - TAB_HEIGHT }}
+	        initialPage={0}
+	        renderTabBar={() => <DefaultTabBar />}
+	        onChangeTab={i => this.changeTab(i)}
+	        prerenderingSiblingsNumber={3}
+	        tabBarPosition='bottom'
+	        tabBarTextStyle={{flex: 1}}
+	      >
 
-        {
-          tabs.map((item, i) => {
-            return (
-              <ScrollView tabLabel={item.name} key={i}>
-      					<View>
-                  <MovieList movies={cinemas[i]} />
-      					</View>
-              </ScrollView>
-            )
-          })
-        }
+	        {
+	          tabs.map((item, i) => {
+	            return (
+	              <ScrollView tabLabel={item.name} key={i}>
+	      					<View>
+	                  <MovieList movies={cinemas[i]} />
+	      					</View>
+	              </ScrollView>
+	            )
+	          })
+	        }
 
-      </ScrollableTabView>
+	      </ScrollableTabView>
+		</View>
     )
   }
 }
