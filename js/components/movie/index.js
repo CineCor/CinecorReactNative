@@ -1,19 +1,19 @@
 import React, {
     Component, PropTypes as PT
-}                               from "react"
+} from "react"
 import {
     ListView, Text, View,
     Image, TouchableOpacity
-}                               from "react-native"
-import moment				   from "moment"
-import myTheme                  from '../../themes/base-theme'
-import styles                   from "./style"
+} from "react-native"
+import moment from "moment"
+import myTheme from '../../themes/base-theme'
+import styles from "./style"
 
 class Movie extends Component {
     static propTypes = {
-        image:  PT.string,
-        title:  PT.string,
-        hours:  PT.array,
+        image: PT.string,
+        title: PT.string,
+        hours: PT.array,
         detail: PT.func
     }
 
@@ -38,8 +38,7 @@ class Movie extends Component {
                             </Text>
                             <View style={styles.hours}>
                                 <Text
-                                    style={styles.hour}
-                                    numberOfLines={1}>
+                                    style={styles.hour}>
                                     { hours.map((hour, i) => `${moment(hour).format('HH:mm')}  `) }
                                 </Text>
                             </View>
