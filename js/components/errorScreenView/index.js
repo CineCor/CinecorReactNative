@@ -36,7 +36,7 @@ class ErrorScreenView extends Component {
     return (
       <Container theme={ myTheme }>
         <View style={styles.mainContainer}>
-          { (this.props.header) ? this.renderHeader : null }
+          { (this.props.header) ? this.renderHeader() : null }
 
           <View style={styles.container}>
             <Text style={styles.text}>
