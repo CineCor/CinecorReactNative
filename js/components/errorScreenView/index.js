@@ -5,7 +5,6 @@ import React, {
 import { connect } from 'react-redux'
 import I18n from 'react-native-i18n'
 import myTheme from '../../themes/base-theme'
-import firebase from '../../firebase'
 import  {
   Container, Content,
   Header, Body, Title,
@@ -15,7 +14,7 @@ import  {
 
 class ErrorScreenView extends Component {
 	static propTypes = {
-		header:    PT.bool,
+		header: PT.bool,
 		errorText: PT.string
 	}
 
@@ -34,8 +33,6 @@ class ErrorScreenView extends Component {
   }
 
   render() {
-		firebase.crash().report(errorText)
-
     return (
       <Container theme={ myTheme }>
         <View style={styles.mainContainer}>
