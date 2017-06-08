@@ -23,9 +23,8 @@ const filterCinemas = createSelector(
 const filterCinemasByTab = createSelector(
   cinemasSelector,
   cinemasSelectedIdSelector,
-  (cinemas, id) =>{
-  return cinemas.filter(cinema => cinema.id === id)[0]
-})
+  (cinemas, id) => cinemas[id]
+)
 
 
 const isAuthenticated = user => {
