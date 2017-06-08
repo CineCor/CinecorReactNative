@@ -5,6 +5,7 @@ import {
     ListView, Text, View,
     Image, TouchableOpacity
 }                               from "react-native"
+import moment				   from "moment"
 import myTheme                  from '../../themes/base-theme'
 import styles                   from "./style"
 
@@ -39,15 +40,7 @@ class Movie extends Component {
                                 <Text
                                     style={styles.hour}
                                     numberOfLines={1}>
-                                    {
-                                        hours.map((hour, i) => {
-                                            const date = new Date(hour)
-                                            const hourFormated = date.getHours()
-                                            const minutesFormated = date.getMinutes()
-                                            const time = `${hourFormated}:${minutesFormated}   `
-                                            return time
-                                        })
-                                    }
+                                    { hours.map((hour, i) => `${moment(hour).format('HH:mm')}  `) }
                                 </Text>
                             </View>
                         </View>
