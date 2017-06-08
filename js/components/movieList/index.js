@@ -60,7 +60,7 @@ class MovieList extends Component {
             return  (
                 <ErrorScreenView
                     errorText={ I18n.t('app.emptySearch') }
-                    header='false'
+                    header={false}
                 />
             )
         }
