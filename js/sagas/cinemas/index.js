@@ -7,36 +7,37 @@ import firebase                 from '../../firebase'
 
 
 function cinemasPromise() {
-  return new Promise(resolve => {
-    const database = firebase.database()
-    const connectionRef = database.ref('cinemas')
-    connectionRef.on('value', resolve)
-  })
+	return new Promise(resolve => {
+		const database = firebase.database()
+		const connectionRef = database.ref('cinemas')
+		connectionRef.on('value', resolve)
+	})
 }
 
 function tabsName(cinemas) {
-  return cinemas.map(cinema => ({
-    name: cinema.name,
-    id: cinema.id
-  }))
+	return cinemas.map(cinema => ({
+		name: cinema.name,
+		id: cinema.id
+	}))
 }
 
 function* fetchCinemas() {
-    try {
-      const cinemas = yield call(cinemasPromise)
-      const cinemasOrdened = cinemas.val()
+	try {
+		const cinemas = yield call(cinemasPromise)
+		const cinemasOrdened = cinemas.val()
 
-      yield put( actions.cinemasReceived( cinemasOrdened ) )
-      yield put( actions.selectCinema(0) )
-      yield put( actions.saveTabs( tabsName( cinemasOrdened ) ) )
-    }
-    catch (error) {
-        yield put(actions.fetchCinemasFailed(error))
-    }
+		yield put( actions.cinemasReceived( cinemasOrdened ) )
+		yield put( actions.selectCinema(0) )
+		yield put( actions.saveTabs( tabsName( cinemasOrdened ) ) )
+	}
+	catch (error) {
+		yield put(actions.fetchCinemasFailed(error))
+		firebase.crash().report(error)
+	}
 }
 
 function* watchFetchCinemas() {
-    yield* takeEvery(Types.FETCH_CINEMAS, fetchCinemas)
+	yield* takeEvery(Types.FETCH_CINEMAS, fetchCinemas)
 }
 
 export default watchFetchCinemas

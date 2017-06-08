@@ -25,7 +25,7 @@ function* signIn() {
     }
   }
   catch (error) {
-    console.log(error)
+    firebase.crash().report(error)
   }
 }
 
