@@ -33,6 +33,7 @@ export default styles = {
 	genresContainer: {
 		flexDirection: 'row',
 		flexWrap: 'wrap',
+		alignItems: 'center',
 		marginTop: 5,
 		marginBottom: 5
 	},
@@ -53,6 +54,7 @@ export default styles = {
 		borderRadius: 100,
 	},
 	genresText: {
+		lineHeight: 15,
 		color: myTheme.light,
 	},
 	duration: {
