@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     marginLeft: 20,
-    marginTop: 15
+    paddingTop: 15,
+    paddingBottom: 15
   },
   scrollContainer: {
     paddingRight: 20
