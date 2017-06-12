@@ -29,15 +29,26 @@ class MovieDetail extends Component {
   }
 
   renderGenres() {
-    return this.props.movie.genres.map((genre, i) => {
-      return (
-        <View key={i} style={styles.genresBubble}>
-          <Text style={styles.genresText}>
-            { genre }
-          </Text>
-        </View>
-      )
-    })
+		if (this.props.movie.genres) {
+			return (
+				<View style={styles.genresContainer}>
+					{
+						this.props.movie.genres.map((genre, i) => {
+							return (
+								<View key={i} style={styles.genresBubble}>
+									<Text style={styles.genresText}>
+										{ genre }
+									</Text>
+								</View>
+							)
+						})
+					}
+				</View>
+			)
+		}
+		else {
+			return null
+		}
   }
 
   render() {
@@ -90,13 +101,11 @@ class MovieDetail extends Component {
           </View>
 
           <View style={styles.container}>
-            <View style={styles.genresContainer}>
-            { this.renderGenres() }
-            </View>
+						{ this.renderGenres() }
 
 			<View style={styles.hoursContainer}>
 				<Text>
-					{ movie.hours.map((hour, i) => `${moment(hour).format('HH:mm')}  `) }
+					{ (movie.hours) ? movie.hours.map((hour, i) => `${moment(hour).format('HH:mm')}  `) : null }
 				</Text>
 			</View>
 
