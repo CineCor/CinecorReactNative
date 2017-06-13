@@ -5,6 +5,7 @@ import {
     ListView, Text, View,
     Image, TouchableOpacity
 } from "react-native"
+import * as Animatable from 'react-native-animatable'
 import moment from "moment"
 import myTheme from '../../themes/base-theme'
 import styles from "./style"
@@ -26,24 +27,26 @@ class Movie extends Component {
                 activeOpacity={OPACITY}
                 underlayColor={myTheme.primary}>
                 <View style={styles.containerList}>
-                    <Image
+					<View style={styles.textIntoImage}>
+							<Text
+									style={styles.title}
+									numberOfLines={1}>
+									{title}
+							</Text>
+							<View style={styles.hours}>
+									<Text
+											style={styles.hour}>
+											{ hours.map((hour, i) => `${moment(hour).format('HH:mm')}  `) }
+									</Text>
+							</View>
+					</View>
+                    <Animatable.Image
                         source={{uri: image}}
                         defaultSource={require('../../images/backdrop.png')}
-                        style={styles.image}>
-                        <View style={styles.textIntoImage}>
-                            <Text
-                                style={styles.title}
-                                numberOfLines={1}>
-                                {title}
-                            </Text>
-                            <View style={styles.hours}>
-                                <Text
-                                    style={styles.hour}>
-                                    { hours.map((hour, i) => `${moment(hour).format('HH:mm')}  `) }
-                                </Text>
-                            </View>
-                        </View>
-                    </Image>
+                        style={styles.image}
+						animation='fadeIn'
+						duration={500}>
+                    </Animatable.Image>
                 </View>
             </TouchableOpacity>
         )

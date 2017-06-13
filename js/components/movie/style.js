@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
-import myTheme        from '../../themes/base-theme';
+import myTheme from '../../themes/base-theme';
+import { Dimensions } from 'react-native'
+const { width } = Dimensions.get('window')
 
 module.exports = StyleSheet.create({
 	container: {
@@ -17,6 +19,7 @@ module.exports = StyleSheet.create({
   },
   image: {
     flex: 1,
+		position: 'relative',
     resizeMode: 'cover',
     height: 100,
     flexDirection: 'row',
@@ -24,7 +27,11 @@ module.exports = StyleSheet.create({
   },
   textIntoImage: {
     flex: 1,
-    justifyContent: 'center',
+		position: 'absolute',
+		zIndex: 9,
+		height: 100,
+		width,
+    justifyContent: 'flex-start',
     backgroundColor: 'rgba(120,120,120,0.3)',
     padding: 20
   },
