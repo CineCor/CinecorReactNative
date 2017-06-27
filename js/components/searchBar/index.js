@@ -1,6 +1,6 @@
 
 import React, {
-    Component, PropTypes as PT
+  Component, PropTypes as PT
 } from "react"
 import { connect } from 'react-redux'
 import I18n from 'react-native-i18n'
@@ -27,7 +27,7 @@ import {
 const { width } = Dimensions.get('window')
 
 class searchBar extends Component {
-	static propTypes = {
+  static propTypes = {
     backgroundColor: PT.string,
     titleColor: PT.string,
     onBack: PT.func,
@@ -57,15 +57,15 @@ class searchBar extends Component {
 
   back() {
     globalNav.navigator.pop()
-		if (this.props.onBack) return this.props.onBack()
+    if (this.props.onBack) return this.props.onBack()
   }
 
   renderBack() {
     return (
       <Button
-        transparent
-        onPress={() => this.back()}>
-          <Icon name="arrow-back" size={25} style={{color: this.getTextColor()}} />
+      transparent
+      onPress={() => this.back()}>
+      <Icon name="arrow-back" size={25} style={{color: this.getTextColor()}} />
       </Button>
     )
   }
@@ -74,24 +74,23 @@ class searchBar extends Component {
     return (
       <Animatable.View ref="searchBarAnim" style={{position: 'absolute', right: -width, zIndex: 3, width: width}}>
         <Header
-          style={{backgroundColor: this.getBackgroundColor()}}
+          style={{backgroundColor: this.getBackgroundColor(), borderBottomWidth: 0}}
           searchBar
           rounded
           toolbarInputColor={myTheme.light}
           iosBarStyle="light-content">
           <Item style={{backgroundColor: myTheme.backgroundSearcher}}>
-            <Icon name="ios-search" />
-            <Input
-              placeholder={I18n.t('app.search')}
-              value={this.props.words}
-              onChangeText={(e) => this.search(e)}
-              blurOnSubmit={true}
-				autoFocus={true}
-				onSubmitEditing={Keyboard.dismiss} />
-            <Icon
-              name="md-close-circle"
-              color={myTheme.secondaryText}
-              onPress={this.clear.bind(this)} />
+          <Icon name="ios-search" />
+          <Input
+            placeholder={I18n.t('app.search')}
+            value={this.props.words}
+            onChangeText={(e) => this.search(e)}
+            blurOnSubmit={true}
+            onSubmitEditing={Keyboard.dismiss} />
+          <Icon
+            name="md-close-circle"
+            color={myTheme.secondaryText}
+            onPress={this.clear.bind(this)} />
           </Item>
           <Button
             style={{marginRight: 10}}
@@ -108,17 +107,16 @@ class searchBar extends Component {
 
   renderLogo(title) {
     return (title) ? (
-        <Text style={{color: this.getTextColor()}}>
-          { title }
-        </Text>
-      )
-      :
-      (
-        <Image
-          style={{width: 28, height: 32, marginTop: 5}}
-          source={require('../../images/cinecor.png')}>
-        </Image>
-      )
+      <Text style={{color: this.getTextColor()}}>
+        { title }
+      </Text>
+    )
+    :
+    (
+      <Image
+        style={{width: 28, height: 32, marginTop: 5}}
+        source={require('../../images/cinecor.png')} />
+    )
   }
 
   renderTitle() {
@@ -126,29 +124,29 @@ class searchBar extends Component {
     return (
       <Animatable.View ref="barAnim">
         <Header
-          style={{backgroundColor: this.getBackgroundColor()}}
+          style={{backgroundColor: this.getBackgroundColor(), borderBottomWidth: 0}}
           iosBarStyle="light-content">
-            <Left style={{flex: (back) ? 1 : 2}}>
-              { ( back ) ? this.renderBack() : null }
-            </Left>
-            <Body style={{flex: (search) ? 2 : 5}}>
-              <Title>
-                { this.renderLogo(title) }
-              </Title>
-            </Body>
-            <Right style={{flex: (back) ? 1 : 2}}>
-              { (search) ?
-                <Button
-                  transparent
-                  onPress={() => this.open()}>
-                    <Text style={{color: this.getTextColor()}}>
-                      { I18n.t('app.search') }
-                    </Text>
-                </Button>
-                :
-                null
-              }
-            </Right>
+          <Left style={{flex: (back) ? 1 : 2}}>
+            { ( back ) ? this.renderBack() : null }
+          </Left>
+          <Body style={{flex: (search) ? 2 : 5}}>
+          <Title>
+            { this.renderLogo(title) }
+          </Title>
+          </Body>
+          <Right style={{flex: (back) ? 1 : 2}}>
+            { (search) ?
+              <Button
+                transparent
+                onPress={() => this.open()}>
+                <Text style={{color: this.getTextColor()}}>
+                  { I18n.t('app.search') }
+                </Text>
+              </Button>
+              :
+              null
+            }
+          </Right>
         </Header>
       </Animatable.View>
     )
@@ -161,7 +159,7 @@ class searchBar extends Component {
   close() {
     this.clear()
     this.toggle()
-	Keyboard.dismiss()
+    Keyboard.dismiss()
   }
 
   open() {
@@ -179,23 +177,23 @@ class searchBar extends Component {
   }
 
   toggle() {
-      if (this.state.active) {
-        this.refs.searchBarAnim.transition(
-          {left: 0},
-          {left: width},
-          500
-        )
-        this.refs.barAnim.fadeIn(100)
-      }
-      else {
-        this.refs.barAnim.fadeOut(500)
-        this.refs.searchBarAnim.transition(
-          {left: width},
-          {left: 0},
-          500
-        )
-      }
-      this.toggleActive()
+    if (this.state.active) {
+      this.refs.searchBarAnim.transition(
+        {left: 0},
+        {left: width},
+        500
+      )
+      this.refs.barAnim.fadeIn(100)
+    }
+    else {
+      this.refs.barAnim.fadeOut(500)
+      this.refs.searchBarAnim.transition(
+        {left: width},
+        {left: 0},
+        500
+      )
+    }
+    this.toggleActive()
   }
 
   setStatusBarColor() {
@@ -204,8 +202,7 @@ class searchBar extends Component {
     return (
       <StatusBar
         barStyle={statusBarColor}
-        animated={true}
-      />
+        animated={true} />
     )
   }
 
@@ -213,21 +210,21 @@ class searchBar extends Component {
   render() {
     return (
       <View style={{ backgroundColor: this.getBackgroundColor() }}>
-      { (this.props.search) ? this.renderSearch() : null }
-      { this.renderTitle() }
-      { this.setStatusBarColor() }
+        { (this.props.search) ? this.renderSearch() : null }
+        { this.renderTitle() }
+        { this.setStatusBarColor() }
       </View>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-    words: state.search.words
+  words: state.search.words
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    saveSearch: (word) => dispatch(saveSearch(word)),
-    clearSavedSearch: () => dispatch(clearSavedSearch())
+  saveSearch: (word) => dispatch(saveSearch(word)),
+  clearSavedSearch: () => dispatch(clearSavedSearch())
 })
 
 
